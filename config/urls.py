@@ -19,12 +19,20 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 from config import settings
+from django.conf.urls.i18n import i18n_patterns
+from django.conf.urls import handler403, handler404, handler500
 
 urlpatterns = [
+    path('admin/defender/', include('defender.urls')), # defender admin
     path('admin/', admin.site.urls),
     path('', include('app.urls')),
     path('accounts/', include('accounts.urls')),
-
+    
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+from app.views import error_404, error_403, error_500
+handler404 = error_404
+handler403 = error_403
+handler500 = error_500

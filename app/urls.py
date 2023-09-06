@@ -16,4 +16,8 @@ urlpatterns = [
     path('check-out/', checkout, name='check-out'),
     path('contact/', contact, name='contact'),
     path('search/', search, name='search'),
+
+    ############## About Shop
+    path('about/', about, name='about'),
+    path('questions/', questions, name='questions'),
 ]

@@ -4,6 +4,8 @@ from django.contrib import messages
 from .forms import *
 from app.models import Item, CartItem
 from django.contrib.auth import logout
+from django_ratelimit.decorators import ratelimit
+
 
 # Create your views here.
 
@@ -22,6 +24,7 @@ def register(request):
     item = Item.objects.all()
     return render(request, 'accounts/register.html', {'form': form, 'item': item})
 
+@ratelimit(key='ip', rate='180/s')
 def login_view(request):
     item = Item.objects.all()
 
@@ -37,8 +40,9 @@ def login_view(request):
         else:
             messages.error(request, 'Foydalanuvchi nomi yoki paroli noto\'g\'ri.')
             return redirect('login')
-    
+
     return render(request, 'accounts/login.html', {'item': item})
+
 
 def logout_view(request):
     logout(request)

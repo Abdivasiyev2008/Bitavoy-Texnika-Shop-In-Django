@@ -3,6 +3,7 @@ from .models import *
 import numpy as np
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
+from django_ratelimit.decorators import ratelimit
 
 # Create your views here.
 
@@ -24,26 +25,26 @@ def homePage(request):
     return render(request, 'index.html', context)
 
 def itemList(request, pk):
-    list = OrderItem.objects.all().filter(id=pk)
-    orederitem = OrderItem.objects.all().filter(id=pk)
     item = Item.objects.all().filter(id=pk)
+    item_list = OrderItem.objects.all().filter(id=pk)
+    orederitem = OrderItem.objects.all().filter(id=pk)
+    
     order = Order.objects.all()
     order = np.random.choice(order, size=2, replace=False)
     
     context = {
         'item': item,
-        'list': list,
+        'list': item_list,
         'order': order,
         'orederitem': orederitem,
-        'list': list,
     }
 
     return render(request, 'item_list.html', context)
 
 def orderlist(request, pk):
-    list = Order.objects.all().filter(id=pk)
-    orederitem = OrderItem.objects.all().filter(id=pk)
     item = Item.objects.all().filter(id=pk)
+    orederitem = OrderItem.objects.all().filter(id=pk)
+    list = Order.objects.all().filter(orderItem=pk)
     order = Order.objects.all()
     order = np.random.choice(order, size=2, replace=False)
     
@@ -189,29 +190,33 @@ def checkout(request):
         quantity += cart_item.quantity
 
     if request.method == 'POST':
-        data = CheckOut()
-        data.user = current_user
-        data.first_name = request.user.first_name
-        data.last_name = request.user.last_name
-        data.phone = request.POST['phone']
-        data.email = request.user.email
-        data.address1 = request.POST['address1']
-        data.address2 = request.POST['address2']
-        data.state = request.POST['state']
-        data.city = request.POST['city']
-        data.save()
+        if request.POST['phone'] == '' or request.POST['address1'] == '' or request.POST['address2'] == '' or request.POST['state'] == '' or request.POST['city'] == '':
+            return redirect('check-out')
+        
+        else:
+            data = CheckOut()
+            data.user = current_user
+            data.first_name = request.user.first_name
+            data.last_name = request.user.last_name
+            data.phone = request.POST['phone']
+            data.email = request.user.email
+            data.address1 = request.POST['address1']
+            data.address2 = request.POST['address2']
+            data.state = request.POST['state']
+            data.city = request.POST['city']
+            data.save()
 
-        for cart_item in cart_items:
-            checkout_user = CheckOutUser()
-            checkout_user.order = data
-            checkout_user.user = current_user
-            checkout_user.product = cart_item.product
-            checkout_user.product_price = cart_item.product.price
-            checkout_user.quantity = cart_item.quantity
-            checkout_user.ordered = False
-            checkout_user.save()
+            for cart_item in cart_items:
+                checkout_user = CheckOutUser()
+                checkout_user.order = data
+                checkout_user.user = current_user
+                checkout_user.product = cart_item.product
+                checkout_user.product_price = cart_item.product.price
+                checkout_user.quantity = cart_item.quantity
+                checkout_user.ordered = False
+                checkout_user.save()
 
-        cart_items.delete()  # Remove the purchased items from CartItem
+            cart_items.delete()  # Remove the purchased items from CartItem
     
     item = Item.objects.all()
 
@@ -223,6 +228,7 @@ def checkout(request):
     
     return render(request, 'checkout.html', context)
 
+@ratelimit(key='user_or_ip', rate='3/m')
 @login_required
 def contact(request):
     if request.method == "POST":
@@ -271,3 +277,24 @@ def search(request):
     }
 
     return render(request, 'search.html', context)
+
+
+######################## About Shop ########################
+
+def about(request):
+    return render(request, 'about_shop/about.html')
+
+def questions(request):
+    return render(request, 'about_shop/questions.html')
+
+
+##################################### HTTP Errors ###############################
+
+def error_404(request, exception=None):
+    return render(request, 'error/404.html')
+
+def error_403(request, exception=None):
+    return render(request, 'error/403.html')
+
+def error_500(request, exception=None):
+    return render(request, 'error/500.html')

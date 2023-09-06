@@ -1,7 +1,9 @@
-asgiref==3.7.2
-Django==3.2.20
-numpy==1.21.6
-Pillow==9.5.0
-pytz==2023.3
-sqlparse==0.4.4
-typing-extensions==4.7.1
+asgiref
+Django
+numpy
+Pillow
+pytz
+sqlparse
+typing-extensions
+django-ratelimit
+django-jazzmin

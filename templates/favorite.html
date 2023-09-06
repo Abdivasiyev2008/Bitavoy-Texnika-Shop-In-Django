@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
 
 {% block content %}
@@ -36,8 +37,8 @@
     <div class="row px-xl-5">
         <div class="col-12">
             <nav class="breadcrumb bg-light mb-30">
-                <a class="breadcrumb-item text-dark" href="#">Home</a>
-                <span class="breadcrumb-item active">Favorites</span>
+                <a class="breadcrumb-item text-dark" href="#">{% trans 'Home' %}</a>
+                <span class="breadcrumb-item active">{% trans 'Favorites' %}</span>
             </nav>
         </div>
     </div>
@@ -88,7 +89,7 @@
     <!-- Shop End -->
 
 {% else %}
-    <center><h1>Your Favorites Empty !!!</h1></center>
+    <center><h1>{% trans 'Your Favorites Empty !!!' %}</h1></center>
 {% endif %}
 
 {% endblock content %}

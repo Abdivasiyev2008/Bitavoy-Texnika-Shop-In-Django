@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
+{% load i18n %}
 {% load static %}
+
 {% block content %}
     <!DOCTYPE html>
     <html lang="en">
@@ -29,58 +31,6 @@
     </head>
 
     <body>
-        <!-- Carousel Start -->
-        <div class="container-fluid mb-3">
-            <div class="row px-xl-5">
-                {% for i in fr_cr %}
-                    <div class="col-lg-8">
-                        <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-ride="carousel">
-                            <ol class="carousel-indicators">
-                                <li data-target="#header-carousel" data-slide-to="0" class="active"></li>
-                                <li data-target="#header-carousel" data-slide-to="1"></li>
-                                <li data-target="#header-carousel" data-slide-to="2"></li>
-                            </ol>
-                            {% for picture in i.orderimage_set.all  %}
-                                {% if picture == i.orderimage_set.all.first %}
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item position-relative active" style="height: 430px;">
-                                            <img class="position-absolute w-100 h-100" src="{{ picture.image.url }}"
-                                                style="object-fit: cover;">
-                                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
-                                                <div class="p-3" style="max-width: 700px;">
-                                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">{{i.name}}</h1>
-                                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">{{ i.about | slice:":100"}}</p>
-                                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
-                                                        href="#">Shop Now</a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                            
-                        </div>
-                    </div>
-                {% endfor %}
-
-                <div class="col-lg-4">
-                    {% for i in twice_cr %}
-                        {% for picture in i.orderimage_set.all  %}
-                            {% if picture == i.orderimage_set.all.first %}    
-                                <div class="product-offer mb-30" style="height: 200px;">
-                                    <img class="img-fluid" src="{{ picture.image.url }}" alt="">
-                                    <div class="offer-text">
-                                        <h3 class="text-white mb-3">{{ i.name }}</h3>
-                                        <a href="" class="btn btn-primary">Shop Now</a>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endfor %}
-                    {% endfor %}
-                </div>
-            </div>
-        </div>
-        <!-- Carousel End -->
 
 
         <!-- Featured Start -->
@@ -89,36 +39,35 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                         <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+                        <h5 class="font-weight-semi-bold m-0">{% trans 'Sifatli Mahsulotlar' %}</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                         <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                        <h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+                        <h5 class="font-weight-semi-bold m-0">{% trans 'Dostavka Tekin' %}</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                         <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+                        <h5 class="font-weight-semi-bold m-0">{% trans '14 Kunda Qaytarish' %}</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                         <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
-                        <h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+                        <h5 class="font-weight-semi-bold m-0">{% trans '24/7 Online' %}</h5>
                     </div>
                 </div>
             </div>
         </div>
         <!-- Featured End -->
 
-
         <!-- Item Start -->
         <div class="container-fluid pt-5">
             <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span
-                    class="bg-secondary pr-3">Categories</span></h2>
+                    class="bg-secondary pr-3">{% trans 'Kategoriya' %}</span></h2>
             <div class="row px-xl-5 pb-3">
                 {% for i in list %}
                     <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
@@ -145,7 +94,7 @@
 
         <!-- Products Start -->
         <div class="container-fluid pt-5 pb-3">
-            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">All products</span></h2>
+            <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4"><span class="bg-secondary pr-3">{% trans 'Barcha Mahsulotlar' %}</span></h2>
             <div class="row px-xl-5">
                 {% for i in order %}
                     <div class="col-lg-3 col-md-4 col-sm-6 pb-1">
