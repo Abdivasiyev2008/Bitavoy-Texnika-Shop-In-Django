@@ -7,3 +7,5 @@ sqlparse
 typing-extensions
 django-ratelimit
 django-jazzmin
+python-decouple
+whitenoise
