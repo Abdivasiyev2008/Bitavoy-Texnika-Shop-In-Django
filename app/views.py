@@ -4,6 +4,7 @@ import numpy as np
 from django.http import HttpResponseRedirect
 from django.contrib.auth.decorators import login_required
 from django_ratelimit.decorators import ratelimit
+from guest_user.decorators import allow_guest_user
 
 # Create your views here.
 
@@ -83,7 +84,7 @@ def orderDetail(request, pk):
 
     return render(request, 'detail.html', context)
 
-@login_required
+@allow_guest_user
 def cart_view(request):
     cart_items = CartItem.objects.filter(user=request.user)
 
@@ -110,7 +111,7 @@ def cart_view(request):
 
     return render(request, 'cart.html', context)
 
-@login_required
+@allow_guest_user
 def add_to_cart(request, pk):
     product = get_object_or_404(Order, id=pk)
     action = request.POST.get('action')
@@ -132,7 +133,7 @@ def add_to_cart(request, pk):
     
     return HttpResponseRedirect(referring_page)
 
-@login_required
+@allow_guest_user
 def remove_from_cart(request, pk):
     item = get_object_or_404(CartItem, id=pk)
     item.delete()
@@ -142,7 +143,7 @@ def remove_from_cart(request, pk):
     
     return HttpResponseRedirect(referring_page)
 
-@login_required
+@allow_guest_user
 def add_to_favorites(request, pk):
     product = get_object_or_404(Order, id=pk)
     favorite_item = FavoriteItem(user=request.user, product=product)
@@ -151,7 +152,7 @@ def add_to_favorites(request, pk):
     referring_page = request.META.get('HTTP_REFERER')
     return HttpResponseRedirect(referring_page)
 
-@login_required
+@allow_guest_user
 def favorite(request):
     favorite_items = FavoriteItem.objects.filter(user=request.user)
     item = Item.objects.all()
@@ -163,7 +164,7 @@ def favorite(request):
 
     return render(request, 'favorite.html', context)
 
-@login_required
+@allow_guest_user
 def remove_from_favorite(request, pk):
     item = get_object_or_404(FavoriteItem, id=pk)
     item.delete()
@@ -174,7 +175,7 @@ def remove_from_favorite(request, pk):
     return HttpResponseRedirect(referring_page)
 
 
-@login_required
+@allow_guest_user
 def checkout(request):
     current_user = request.user
 
@@ -191,7 +192,7 @@ def checkout(request):
 
     if request.method == 'POST':
         if request.POST['phone'] == '' or request.POST['address1'] == '' or request.POST['address2'] == '' or request.POST['state'] == '' or request.POST['city'] == '':
-            return redirect('check-out')
+            return redirect('home')
         
         else:
             data = CheckOut()
@@ -204,7 +205,15 @@ def checkout(request):
             data.address2 = request.POST['address2']
             data.state = request.POST['state']
             data.city = request.POST['city']
-            data.save()
+            
+            
+            matn = ""
+            from .bot import main
+            import asyncio
+    
+            matn += f"\nIsm-Familiya: {data.first_name} {data.last_name}\nTelefon Raqam: {data.phone}\nViloyat: {data.state}\nTuman: {data.city}\nMahalla: {data.address2}\nUy Manzili: {data.address1}\n"
+            
+            #data.save()
 
             for cart_item in cart_items:
                 checkout_user = CheckOutUser()
@@ -214,8 +223,16 @@ def checkout(request):
                 checkout_user.product_price = cart_item.product.price
                 checkout_user.quantity = cart_item.quantity
                 checkout_user.ordered = False
-                checkout_user.save()
+                
 
+                
+                matn += f"{checkout_user.quantity} ta " + str(checkout_user.product) + f" Narxi: {checkout_user.quantity * checkout_user.product_price}$\n\n"
+            
+                #checkout_user.save()
+            
+                            
+            asyncio.get_event_loop().run_until_complete(main(matn))
+            
             cart_items.delete()  # Remove the purchased items from CartItem
     
     item = Item.objects.all()

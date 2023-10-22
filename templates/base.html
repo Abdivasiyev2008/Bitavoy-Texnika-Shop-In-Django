@@ -7,8 +7,10 @@
     <meta charset="utf-8">
     <title>Bitavoy Texnikalar </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="Bitavoy Texnikalar" name="keywords">
+    <meta content="Bitavoy Texnikalar" name="description">
+    <meta name="google-site-verification" content="Qh1XQQ27hIWyiOkXgmq6Qub_E9p_ouk9snm4Qbpyu9c" />
+    
     <!-- Favicon -->
     <link href="{% static 'img/favicon.ico' %}" rel="icon">
 
@@ -16,7 +18,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">  
     
-    <script src="//code.jivo.ru/widget/7pnjqX0C0T" async></script>
+    <script src="//code.jivo.ru/widget/btDCehlUic" async></script>
 
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
@@ -38,6 +40,7 @@
                     <a class="text-body mr-3" href="{% url 'about' %}">{% trans 'Haqida' %}</a>
                     <a class="text-body mr-3" href="{% url 'contact' %}">{% trans "Bo'g'lanish" %}</a>
                     <a class="text-body mr-3" href="{% url 'questions' %}">{% trans "Tez So'raladigan Savollar" %}</a>
+                    <a class="text-body mr-3" href="https://youtu.be/AKH_JjvuChQ" target="_blank">{% trans "Web Saytdan Foydlanish" %}</a>
                 </div>
             </div>
             <div class="col-lg-6 text-center text-lg-right">
@@ -146,6 +149,10 @@
                             <a href="{% url 'home' %}" class="nav-item nav-link active">{% trans 'Bosh Sahifa' %}</a>
                             <a href="{% url 'shop' %}" class="nav-item nav-link">{% trans "Do'kon" %}</a>
                             <a href="{% url 'contact' %}" class="nav-item nav-link">{% trans "Bog'lanish"  %}</a>
+                            
+                            <a class="nav-item nav-link" href="{% url 'about' %}">{% trans 'Haqida' %}</a>
+                            <a class="nav-item nav-link" href="{% url 'questions' %}">{% trans "Tez So'raladigan Savollar" %}</a>
+                            <a class="nav-item nav-link" href="https://youtu.be/AKH_JjvuChQ" target="_blank">{% trans "Web Saytdan Foydlanish" %}</a>
                         </div>
                         <div class="navbar-nav ml-auto py-0 d-none d-lg-block">
                             <a href="{% url 'favorite' %}" class="btn px-0">
@@ -172,7 +179,7 @@
                 <h5 class="text-secondary text-uppercase mb-4">{% trans "A'loqa Uchun" %}</h5>
                 <p class="mb-4">{% trans "Assalomu alaykum. Agar sizda mahsulotlar va do'kon haqida ma'lumto kerak bo'lsa oldin" %} <a href="{% url 'about' %}">{% trans "Do'kon Haqida" %}</a> {% trans "bo'limini o'qing. Agar boshqa muammolar bo'lsa murojaat qilishingiz mukin" %}</p>
                 <p class="mb-2"><i class="fa fa-map-marker-alt text-primary mr-3"></i>156A, Tashkent, Uzbekistan</p>
-                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@example.com</p>
+                <p class="mb-2"><i class="fa fa-envelope text-primary mr-3"></i>info@bitavoytexnikalar.uz</p>
                 <p class="mb-0"><i class="fa fa-phone-alt text-primary mr-3"></i>+998 90 064 1999 <br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+998 95 881 6999</p>
             </div>
             <div class="col-lg-8 col-md-12">
@@ -220,10 +227,6 @@
         </div>
         <div class="row border-top mx-xl-5 py-4" style="border-color: rgba(256, 256, 256, .1) !important;">
             <div class="col-md-6 px-xl-0">
-                <p class="mb-md-0 text-center text-md-left text-secondary">
-                    &copy; <a class="text-primary" href="">Bitovoy Texnika</a>. {% trans 'Barcha Huquqlar Himoya qilingan. Dasturchi' %}
-                    <a class="text-primary" href="https://t.me/abdivasiyev_2008">Sunnatillo</a>
-                </p>
             </div>
             <div class="col-md-6 px-xl-0 text-center text-md-right">
                 <img class="img-fluid" src="{% static 'img/payments.png' %}" alt="">

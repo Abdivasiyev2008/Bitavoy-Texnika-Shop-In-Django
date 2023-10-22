@@ -10,8 +10,8 @@
     <meta charset="utf-8">
     <title>MultiShop - CART</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="Free HTML Templates" name="keywords">
-    <meta content="Free HTML Templates" name="description">
+    <meta content="Bitavoy Texnikalar" name="keywords">
+    <meta content="Bitavoy Texnikalar" name="description">
 
     <!-- Favicon -->
     <link href="{% static 'img/favicon.ico' %}" rel="icon">
@@ -86,7 +86,7 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="align-middle">{{ item.total_price }} UZS</td>
+                                    <td class="align-middle">{{ item.total_price }} #</td>
                                 </form>
                                 <form action="{% url 'remove_from_cart' item.pk %}">        
                                     <td class="align-middle">
@@ -114,13 +114,13 @@
                     <div class="border-bottom pb-2">
                         <div class="d-flex justify-content-between">
                             <h6 class="font-weight-medium">{% trans 'Yetkazib Berish' %}</h6>
-                            <h6 class="font-weight-medium">0 UZS</h6>
+                            <h6 class="font-weight-medium">Manzilga Qarab</h6>
                         </div>
                     </div>
                     <div class="pt-2">
                         <div class="d-flex justify-content-between mt-2">
                             <h5>{% trans 'Jami' %}</h5>
-                            <h5>{{ total_price }} UZS</h5>
+                            <h5>{{ total_price }} $</h5>
                         </div>
                         <a class="btn btn-block btn-primary font-weight-bold my-3 py-3" href="{% url 'check-out' %}">{% trans 'Proceed To Checkout' %}</a>
                     </div>

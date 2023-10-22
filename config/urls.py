@@ -27,12 +27,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app.urls')),
     path('accounts/', include('accounts.urls')),
+    path("convert/", include("guest_user.urls")),
     
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 from app.views import error_404, error_403, error_500
 handler404 = error_404
 handler403 = error_403
 handler500 = error_500
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

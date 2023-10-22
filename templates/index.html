@@ -8,8 +8,8 @@
     <head>
         <meta charset="utf-8">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
-        <meta content="Free HTML Templates" name="keywords">
-        <meta content="Free HTML Templates" name="description">
+        <meta content="Bitavoy Texnikalar" name="keywords">
+        <meta content="Bitavoy Texnikalar" name="description">
        
         <!-- Favicon -->
         <link href="{% static 'img/favicon.ico' %}" rel="icon">
@@ -96,7 +96,7 @@
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
                     <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
                         <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
-                        <h5 class="font-weight-semi-bold m-0">{% trans 'Dostavka Tekin' %}</h5>
+                        <h5 class="font-weight-semi-bold m-0">{% trans 'Dostavka Manzilga qarab' %}</h5>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
@@ -130,7 +130,7 @@
                                 </div>
                                 <div class="flex-fill pl-3">
                                     <h6>{{ i.name }}</h6>
-                                    <small class="text-body">{{ i.orderitem_set.count }} {% trans 'ta Mahsulot' %}</small>
+                                    <small class="text-body">{{ i.orderitem_set.count }} {% trans 'ta Kompaniya' %}</small>
                                 </div>
                             </div>
                         </a>
@@ -177,7 +177,7 @@
                             <div class="text-center py-4">
                                 <a class="h6 text-decoration-none text-truncate" href="{% url 'order-detail' i.pk %}">{{ i.name }}</a>
                                 <div class="d-flex align-items-center justify-content-center mt-2">
-                                    <h5>{{ i.price }} UZS</h5>
+                                    <h5>{{ i.price }} $</h5>
                                 </div>
                             </div>
                         </div>
