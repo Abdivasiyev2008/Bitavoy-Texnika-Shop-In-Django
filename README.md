@@ -1,1 +1,1 @@
-# Django-Shop
+# Bitavoy Texnikalar Shop in DJANGO
