@@ -28,6 +28,7 @@ urlpatterns = [
     path('', include('app.urls')),
     path('accounts/', include('accounts.urls')),
     path("convert/", include("guest_user.urls")),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
     
 ] + static(settings.MEDIA_URL, document_root= settings.MEDIA_ROOT)
 

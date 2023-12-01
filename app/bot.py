@@ -1,8 +1,8 @@
 import asyncio
 from aiogram import Bot, types
             
-API_TOKEN = '6347258430:AAEqy3e5mvRnxlMmuMWEqtQOgFoAXOSwc8I'
-CHANNEL_ID = '-1001828493881'
+API_TOKEN = '6367826863:AAHX6tvD5bpW4YLMjw56jDqkCa0UC6kAACo'
+CHANNEL_ID = '-1002054828609'
             
 bot = Bot(token=API_TOKEN, parse_mode="HTML")
             

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 
@@ -21,7 +22,7 @@ class OrderItem(models.Model):
 class Order(models.Model):
     orderItem = models.ForeignKey(OrderItem, on_delete=models.CASCADE)
     name = models.CharField(max_length=150)
-    about = models.TextField()
+    about = RichTextField()
     price = models.FloatField()
     date = models.DateTimeField(auto_now_add=True)
 

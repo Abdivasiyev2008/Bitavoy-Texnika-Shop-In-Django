@@ -231,8 +231,11 @@ def checkout(request):
                 #checkout_user.save()
             
                             
-            asyncio.get_event_loop().run_until_complete(main(matn))
+            # asyncio.get_event_loop().run_until_complete(main(matn))
             
+            asyncio.new_event_loop().run_until_complete(main(matn))
+            
+
             cart_items.delete()  # Remove the purchased items from CartItem
     
     item = Item.objects.all()

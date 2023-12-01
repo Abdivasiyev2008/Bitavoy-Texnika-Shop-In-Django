@@ -11,25 +11,22 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-from decouple import config
 
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = "django-insecure-*xyw2wc7b^_6u67mfx*_8g1z5qp8&4jurpcjofc+g!zsz#tj8j"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['bitavoytexnikalar.uz', 'www.bitavoytexnikalar.uz']
-
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -41,22 +38,34 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # download apps
-    'hitcount',
     'defender',
     'guest_user',
-    
+
     # 'jazzmin',
     'django.contrib.admin',
+    'crispy_forms',
+    'ckeditor',
+    'django_social_share',
 
     # my apps
     'app',
     'accounts',
 ]
 
+CRISPY_TEMPLATE_PACK = 'uni_form'
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
+
+CKEDITOR_UPLOAD_PATH = 'static/ckeditor/ckeditor'
+
 AUTHENTICATION_BACKENDS = [
-   "django.contrib.auth.backends.ModelBackend",
-   # it should be the last entry to prevent unauthorized access
-   "guest_user.backends.GuestBackend",
+    "django.contrib.auth.backends.ModelBackend",
+    # it should be the last entry to prevent unauthorized access
+    "guest_user.backends.GuestBackend",
 ]
 
 MIDDLEWARE = [
@@ -81,7 +90,6 @@ CACHES = {
         'LOCATION': 'unique-snowflake'
     }
 }
-      
 
 ROOT_URLCONF = 'config.urls'
 
@@ -103,7 +111,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'config.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
@@ -113,7 +120,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -133,7 +139,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
@@ -147,22 +152,18 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATIC_ROOT = '/home/bitavoyt/public_html/staticfiles'
-STATICFILES_DIRS = ('/home/bitavoyt/public_html/static', )
+STATIC_URL = 'static/'
 
-STATICFILES_FINDERS = [
-    'django.contrib.staticfiles.finders.FileSystemFinder',
-    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = str(BASE_DIR.joinpath('staticfiles'))
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 # Media Files
 MEDIA_URL = '/media/'
-MEDIA_ROOT = '/home/bitavoyt/public_html/media'
+MEDIA_ROOT = str(BASE_DIR.joinpath('media'))
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
@@ -170,4 +171,3 @@ MEDIA_ROOT = '/home/bitavoyt/public_html/media'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'home'
-
